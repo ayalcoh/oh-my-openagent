@@ -1,3 +1,11 @@
+## 2026-10-19 - desktop-toolkit component: the session's channel to toolkits the app hosts for its thread
+
+`src/components/desktop-toolkit/` registers the eval-only tool `omo_desktop_toolkit` (`{op:"acquire", toolkit}`). It answers `unavailable` at once unless the opener listed the toolkit in `open_session.context.omo_toolkits` (comma-separated) and the host has `pi.rpc`; otherwise it emits `omo.toolkit.request {requestId, toolkit}` and waits up to 15 s for the app's `extension_request omo.toolkit.grant {requestId, grant | refusal}`. A grant must be `{endpoint: http://127.0.0.1:<port>/..., tokenFile: <absolute path>}` with no userinfo or query; anything else settles as `invalid_grant`. A late or foreign `requestId` is refused (`accepted:false`). Registered right after `browser-bridge`.
+
+Why: sisyphuslabs/omo-desktop-app#3292. The token stays in a 0600 file because an eval cell's tool results stream to the desktop as `tool_execution_end` and the desktop logs them.
+
+Must not break: never return a token in this tool's result; keep the per-session pending map (two sessions must not settle each other's request). Live proof: `scripts/qa/desktop-toolkit-rpc-e2e.mjs` (granted / not-offered / app-silent).
+
 ## 2026-10-14 - Preserve planning requests across same-process session transitions
 
 The task skill-invocation tracker hands authenticated request, invocation and plan-artifact records to replacement trackers keyed by session ID. Reload, new, resume and fork transitions retain the prior session's evidence; quit and unknown shutdown reasons discard it. Extension-injected inputs still cannot authorize review, and ulw-execute still forbids review.

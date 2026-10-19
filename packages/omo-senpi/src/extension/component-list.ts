@@ -1,5 +1,6 @@
 import { createAstGrepComponent } from "../components/ast-grep"
 import { createBrowserBridgeComponent } from "../components/browser-bridge"
+import { createDesktopToolkitComponent } from "../components/desktop-toolkit"
 import { createBuiltinMcpsComponent } from "../components/builtin-mcps"
 import { createBundledSkillsComponent } from "../components/bundled-skills"
 import { createClaudeCodeComponent } from "../components/claude-code"
@@ -60,6 +61,7 @@ export function createOmoSenpiComponents(taskComponent: OmoSenpiComponent): OmoS
     createXSearchComponent(),
     createComputerUseComponent(),
     createBrowserBridgeComponent(),
+    createDesktopToolkitComponent(),
     createClaudeCodeComponent(),
     createCommentCheckerComponent(),
     taskComponent,
