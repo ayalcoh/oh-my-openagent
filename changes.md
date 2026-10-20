@@ -1,3 +1,7 @@
+## 2026-10-20 - Full access no longer asks before irreversible browser actions (#2465)
+
+`packages/shared-skills/skills/browser/scripts/browser-engine-guard.mjs`: `confirmWithUser` asks `omo_browser_bridge` (`op: "confirm"`) first and returns without a question when the bridge reports Full access. In every other mode the Allow / Don't allow question is unchanged. A guest on Full access was still asked before pay/submit/send-style clicks (Q, 2026-10-14: Full access means no prompts). Tests in `packages/shared-skills/browser-skill-engine.test.ts` cover pay, submit, transfer and merge clicks under Full access with no question, plus the question still asked otherwise.
+
 ## 2026-10-20 - Adopt senpi 2026.10.19-2 for the 5.1.39 cut
 
 All exact senpi pins (root, `omo-native`, `omo-senpi` peer/dev and its `senpi-ai`/`senpi-tui` aliases, `senpi-task`, the pin and package-shape tests, the provider-map derivation comment and the catalog-coverage comment) move from `2026.10.19` to `2026.10.19-2`, with the lockfile regenerated. The provider-map registry, catalog-coverage and chain-provider tests pass unchanged against the new engine, so the map needs no re-derivation. The committed Senpi plugin bundles were regenerated on the canonical linux/amd64 build (bun 1.4.3): only `omo.js` and `omo-onboarding-scan.js` change, both in the provider map they inline (`omo-native/bin/lib/provider-map.json`), whose derivation comment now names senpi 2026.10.19-2; `omo.js` is 1,396,195 bytes, inside its 1,424,569 budget.
