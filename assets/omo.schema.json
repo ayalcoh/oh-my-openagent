@@ -1943,6 +1943,24 @@
           },
           "additionalProperties": false
         },
+        "project_scope": {
+          "default": {
+            "nudge": true,
+            "recall": true
+          },
+          "type": "object",
+          "properties": {
+            "nudge": {
+              "default": true,
+              "type": "boolean"
+            },
+            "recall": {
+              "default": true,
+              "type": "boolean"
+            }
+          },
+          "additionalProperties": false
+        },
         "projection": {
           "default": {
             "max_entries_per_directory": 40,
@@ -4205,6 +4223,18 @@
               },
               "additionalProperties": false
             },
+            "project_scope": {
+              "type": "object",
+              "properties": {
+                "nudge": {
+                  "type": "boolean"
+                },
+                "recall": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
             "projection": {
               "type": "object",
               "properties": {
@@ -6430,6 +6460,18 @@
                   "maximum": 9007199254740991
                 },
                 "query_expansion": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
+            "project_scope": {
+              "type": "object",
+              "properties": {
+                "nudge": {
+                  "type": "boolean"
+                },
+                "recall": {
                   "type": "boolean"
                 }
               },
@@ -8665,6 +8707,18 @@
               },
               "additionalProperties": false
             },
+            "project_scope": {
+              "type": "object",
+              "properties": {
+                "nudge": {
+                  "type": "boolean"
+                },
+                "recall": {
+                  "type": "boolean"
+                }
+              },
+              "additionalProperties": false
+            },
             "projection": {
               "type": "object",
               "properties": {
@@ -10888,6 +10942,18 @@
                     "maximum": 9007199254740991
                   },
                   "query_expansion": {
+                    "type": "boolean"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "project_scope": {
+                "type": "object",
+                "properties": {
+                  "nudge": {
+                    "type": "boolean"
+                  },
+                  "recall": {
                     "type": "boolean"
                   }
                 },
@@ -13123,6 +13189,18 @@
                     },
                     "additionalProperties": false
                   },
+                  "project_scope": {
+                    "type": "object",
+                    "properties": {
+                      "nudge": {
+                        "type": "boolean"
+                      },
+                      "recall": {
+                        "type": "boolean"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
                   "projection": {
                     "type": "object",
                     "properties": {
@@ -15353,6 +15431,18 @@
                     },
                     "additionalProperties": false
                   },
+                  "project_scope": {
+                    "type": "object",
+                    "properties": {
+                      "nudge": {
+                        "type": "boolean"
+                      },
+                      "recall": {
+                        "type": "boolean"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
                   "projection": {
                     "type": "object",
                     "properties": {
@@ -17578,6 +17668,18 @@
                         "maximum": 9007199254740991
                       },
                       "query_expansion": {
+                        "type": "boolean"
+                      }
+                    },
+                    "additionalProperties": false
+                  },
+                  "project_scope": {
+                    "type": "object",
+                    "properties": {
+                      "nudge": {
+                        "type": "boolean"
+                      },
+                      "recall": {
                         "type": "boolean"
                       }
                     },
