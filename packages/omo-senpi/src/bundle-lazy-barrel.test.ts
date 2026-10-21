@@ -23,9 +23,11 @@ const BUNDLE_FILES = [
   "omo-memory-palace.js",
   "omo-session-history.js",
   "omo-dori-migration.js",
+  "omo-recall-store.js",
   "omo-telemetry-posthog.js",
   "omo-memory-sync.js",
   "omo-thread-client.js",
+  "omo-feedback.js",
 ] as const
 
 type LazyBarrel = {
