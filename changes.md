@@ -22,6 +22,10 @@ Every such call is journaled by the engine under a replay key, `JSON.stringify([
 
 Tests: the key vectors, the journal (replay, divergence, per-turn indices, released claims, pending, retention, missing turn), the session-tool wiring against a real gateway store (one dispatch on replay, divergence, off means no journal, other extensions untouched), the kernel namespaces and `help()`, and an import-graph walk proving the SDK and the thread component load no layer module statically. `scripts/qa/dori-toolkit-replay-qa.mjs` drives the same contract through real eval kernels, one process per phase.
 
+## 2026-10-19 - git_master.git_env_prefix in omo.json, and git-master's description asks to be loaded (#10613)
+
+`OmoGitMasterSettingsSchema` accepts `git_env_prefix` (default `"GIT_MASTER=1"`, `""` disables, same shell-safe assignment rule as the OpenCode plugin's key) and lists it as native-only in `GIT_MASTER_HARNESS_SUPPORT`; `assets/omo.schema.json` is regenerated and `docs/reference/omo-json.md` documents the key and its per-shell forms. The shared `git-master` SKILL.md description returns to the plugin's wording ("MUST USE for ANY git operations" plus the commit/rebase/squash/history triggers). The OpenCode plugin never auto-injected git-master; models loaded it because of that description, and the softer native one ("skip for ordinary code edits") let them skip it.
+
 ## 2026-10-19 - Release binary size budget 160 -> 182 MiB, measured
 
 omo 5.1.37's publish failed on Linux: linux-x64 and linux-x64-baseline built at 173,365,216 bytes and linux-arm64 at 170,969,896, over the 160 MiB budget (5.1.35's linux-x64 was 162,899,424). The growth is the Bun 1.4.3 runtime, not a stray asset: an empty `bun build --compile --target=bun-linux-x64` is 81,315,296 bytes on 1.4.2 and 90,798,048 on 1.4.3 (+9,482,752), and senpi 2026.10.16 -> 2026.10.19 adds about 1.25 MB of package files. `MAX_BINARY_BYTES` in `script/build-omo-binary.ts` and the matching check in `publish-platform.yml` move to 182 MiB, the measured size plus about 10%; the 5 MiB headroom warning is unchanged.
