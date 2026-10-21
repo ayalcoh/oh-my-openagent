@@ -96,16 +96,21 @@ describe("AGENT_MODEL_REQUIREMENTS", () => {
         })
   })
 
-  test("prometheus uses Fable 5.1 xhigh, then Opus 5.5 max, before Kimi K3 max", () => {
+  test("prometheus uses Fable 5.5 then 5.1 xhigh, then Opus 5.5 max, before Kimi K3 max", () => {
     // given
     const prometheus = AGENT_MODEL_REQUIREMENTS["prometheus"]
 
     // when
-    const [primary, opusFallback, kimiFallback] = prometheus.fallbackChain
+    const [primary, fableFallback, opusFallback, kimiFallback] = prometheus.fallbackChain
 
     // then
-    expect(prometheus.fallbackChain).toHaveLength(3)
+    expect(prometheus.fallbackChain).toHaveLength(4)
     expect(primary).toEqual({
+          providers: ["anthropic", "github-copilot", "opencode"],
+          model: "claude-fable-5-5",
+          variant: "xhigh",
+        })
+    expect(fableFallback).toEqual({
           providers: ["anthropic", "github-copilot", "opencode"],
           model: "claude-fable-5-1",
           variant: "xhigh",
@@ -122,16 +127,21 @@ describe("AGENT_MODEL_REQUIREMENTS", () => {
         })
   })
 
-  test("metis uses Fable 5.1 max, then Opus 5 max, then Kimi K3 max", () => {
+  test("metis uses Fable 5.5 then 5.1 max, then Opus 5.5 max, then Kimi K3 max", () => {
     // given
     const metis = AGENT_MODEL_REQUIREMENTS["metis"]
 
     // when
-    const [primary, opusFallback, kimiFallback] = metis.fallbackChain
+    const [primary, fableFallback, opusFallback, kimiFallback] = metis.fallbackChain
 
     // then
-    expect(metis.fallbackChain).toHaveLength(3)
+    expect(metis.fallbackChain).toHaveLength(4)
     expect(primary).toEqual({
+          providers: ["anthropic", "github-copilot", "opencode"],
+          model: "claude-fable-5-5",
+          variant: "max",
+        })
+    expect(fableFallback).toEqual({
           providers: ["anthropic", "github-copilot", "opencode"],
           model: "claude-fable-5-1",
           variant: "max",

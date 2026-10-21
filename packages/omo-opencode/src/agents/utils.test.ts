@@ -1130,7 +1130,7 @@ describe("createBuiltinAgents with requiresAnyModel gating (sisyphus)", () => {
       // #then
       expect(agents.atlas).toMatchObject({ model: "openai/gpt-5.6-sol", variant: "medium" })
       expect(agents.metis).toBeDefined()
-      expect(agents.metis.model).toBe("anthropic/claude-fable-5-1")
+      expect(agents.metis.model).toBe("anthropic/claude-fable-5-5")
       expect(agents.metis.variant).toBe("max")
     } finally {
       fetchSpy.mockRestore()

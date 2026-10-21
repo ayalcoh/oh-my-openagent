@@ -466,6 +466,14 @@ describe("resolveCategory", () => {
 })
 
 describe("builtin category defaults", () => {
+  test.each(["architect", "artistry", "visual-engineering"])("%s prefers 5.5 and falls back to 5.1 at the same effort", (name) => {
+    // given / when / then
+    for (const ids of [["claude-fable-5-5", "claude-fable-5-1"], ["claude-fable-5-1"]]) {
+      const result = expectResolved(resolveCategory(name, {}, registry(ids.map((id) => model("anthropic", id)))))
+      expect([result.spec.provider, result.spec.modelId, result.spec.variant]).toEqual(["anthropic", ids[0], "max"])
+    }
+  })
+
   test("#given ported builtin defaults #when inspected #then machine routing fields stay pinned without prose wording", () => {
     // given
     const defaults = BUILTIN_CATEGORY_DEFAULTS
@@ -473,20 +481,20 @@ describe("builtin category defaults", () => {
     // then: declared order plus each category's primary provider, model, and variant
     expect(defaults.map(({ config, name }) => [name, config.model, config.variant])).toEqual([
       ["visual-engineering", "google/gemini-4-argon", "low"],
-      ["artistry", "anthropic/claude-fable-5-1", "max"],
+      ["artistry", "anthropic/claude-fable-5-5", "max"],
       ["ultrabrain", "chatgpt-subscription/gpt-6-astra", "max"],
       ["deep-low", "chatgpt-subscription/gpt-6.1-sol", "medium"],
       ["deep-high", "chatgpt-subscription/gpt-6-astra", "high"],
       ["quick", "chatgpt-subscription/gpt-6-luna-fast", "low"],
       ["unspecified-low", "anthropic/claude-sonnet-5-5", "medium"],
       ["unspecified-high", "anthropic/claude-opus-5-5", "medium"],
-      ["architect", "anthropic/claude-fable-5-1", "max"],
+      ["architect", "anthropic/claude-fable-5-5", "max"],
       ["writing", "google/gemini-4-argon", "low"],
     ])
 
     // then: availability gating applies only to the model-gated builtins; any listed id opens the gate
     expect(BUILTIN_CATEGORY_REQUIRES_MODEL).toEqual({
-      architect: ["claude-fable-5-1"],
+      architect: ["claude-fable-5-5", "claude-fable-5-1"],
       ultrabrain: ["gpt-6-astra", "gpt-5.6-sol"],
       "deep-low": ["gpt-6.1-sol", "gpt-6.1-sol-fast", "gpt-5.6-sol-fast", "gpt-5.6-sol"],
       "deep-high": ["gpt-6-astra"],

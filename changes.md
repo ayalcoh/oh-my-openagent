@@ -1,3 +1,12 @@
+## 2026-10-21 - Launch-gated Fable 5.5 routing preparation (#10798)
+
+Every builtin Fable 5.1 chain/profile rung gains a provisional Fable 5.5 rung
+immediately ahead of it, with the same providers and max/xhigh effort. The 5.1
+rung stays available, including the architect gate, and gateway copies cannot
+satisfy builtin rungs. Routing remains a separate final commit from recognition;
+launch requires verified catalog values, evaluation and adoption of a senpi
+release listing the model. No release date, price or unverified limit is assumed.
+
 ## 2026-10-21 - Launch-gated Fable 5.5 recognition (#10798)
 
 Recognize the provisional `claude-fable-5-5` ID in supplemental model capabilities

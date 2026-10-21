@@ -1,7 +1,8 @@
+import { FABLE_55_LAUNCH } from "@oh-my-opencode/model-core"
 import type { DelegateFallbackEntry } from "@oh-my-opencode/delegate-core"
 
 // Source of truth mirrored from packages/model-core/src/category-model-requirements.ts.
-// senpi-task cannot import model-core here without adding a package dependency outside this task's scope.
+// Model IDs share the launch block; chain rows remain independently mirrored for parity checks.
 // senpi-only differences (model-core/omo-opencode carry neither; the OpenCode and Codex editions have
 // no such providers):
 //   - kimi rungs carry BOTH provider ids ("kimi-coding" senpi registry id and the "kimi-for-coding"
@@ -33,6 +34,11 @@ export const CATEGORY_FALLBACK_CHAINS: Readonly<Record<string, readonly Delegate
     { providers: ["google", "google-vertex", "opencode"], model: "gemini-4-argon", variant: "low" },
     {
       providers: ["anthropic-subscription", "anthropic", "anthropic-api", "github-copilot", "opencode"],
+      model: FABLE_55_LAUNCH.id,
+      variant: "max",
+    },
+    {
+      providers: ["anthropic-subscription", "anthropic", "anthropic-api", "github-copilot", "opencode"],
       model: "claude-fable-5-1",
       variant: "max",
     },
@@ -48,6 +54,11 @@ export const CATEGORY_FALLBACK_CHAINS: Readonly<Record<string, readonly Delegate
     }
   ],
   architect: [
+    {
+      providers: ["anthropic-subscription", "anthropic", "anthropic-api", "github-copilot", "opencode"],
+      model: FABLE_55_LAUNCH.id,
+      variant: "max",
+    },
     {
       providers: ["anthropic-subscription", "anthropic", "anthropic-api", "github-copilot", "opencode"],
       model: "claude-fable-5-1",
@@ -84,6 +95,11 @@ export const CATEGORY_FALLBACK_CHAINS: Readonly<Record<string, readonly Delegate
     }
   ],
   artistry: [
+    {
+      providers: ["anthropic-subscription", "anthropic", "anthropic-api", "github-copilot", "opencode"],
+      model: FABLE_55_LAUNCH.id,
+      variant: "max",
+    },
     {
       providers: ["anthropic-subscription", "anthropic", "anthropic-api", "github-copilot", "opencode"],
       model: "claude-fable-5-1",

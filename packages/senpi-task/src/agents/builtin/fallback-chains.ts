@@ -1,9 +1,10 @@
+import { FABLE_55_LAUNCH } from "@oh-my-opencode/model-core"
 import type { DelegateFallbackEntry } from "@oh-my-opencode/delegate-core"
 
 // Source of truth mirrored from packages/model-core/src/agent-model-requirements.ts.
 // Key rename: the two curated agents carry their canonical ids here (plan-consultant, plan-reviewer);
 // the mirrored rungs (models, providers, variants, order) are unchanged from the mirror source.
-// senpi-task cannot import model-core here without adding a package dependency outside this task's scope.
+// Model IDs share the launch block; chain rows remain independently mirrored for parity checks.
 // senpi-only difference: every claude-* rung is headed by "anthropic-subscription", senpi's Claude subscription
 // lane, so a Claude Pro/Max login outranks the metered `opencode` lane (#8051; see the category chains
 // for the full rationale). model-core stays without it - no other edition has that provider.
@@ -31,6 +32,11 @@ export const AGENT_FALLBACK_CHAINS: Readonly<Record<string, readonly DelegateFal
     { providers: ["opencode-go"], model: "minimax-m2.7" }
   ],
   "plan-consultant": [
+    {
+      providers: ["anthropic-subscription", "anthropic", "github-copilot", "opencode"],
+      model: FABLE_55_LAUNCH.id,
+      variant: "max",
+    },
     {
       providers: ["anthropic-subscription", "anthropic", "github-copilot", "opencode"],
       model: "claude-fable-5-1",

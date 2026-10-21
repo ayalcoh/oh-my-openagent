@@ -1,3 +1,4 @@
+import { FABLE_55_LAUNCH } from "./fable-55-launch"
 import type { ModelRequirement } from "./model-requirement-types"
 
 export const CATEGORY_MODEL_REQUIREMENTS: Record<string, ModelRequirement> = {
@@ -7,6 +8,11 @@ export const CATEGORY_MODEL_REQUIREMENTS: Record<string, ModelRequirement> = {
       // this model, so `low` is the floor; Copilot joins once code-yeongyu/senpi#3379 verifies its
       // thinking control. The rung is unresolvable until the engine catalog carries the model.
       { providers: ["google", "google-vertex", "opencode"], model: "gemini-4-argon", variant: "low" },
+      {
+        providers: ["anthropic", "anthropic-api", "github-copilot", "opencode"],
+        model: FABLE_55_LAUNCH.id,
+        variant: "max",
+      },
       {
         providers: ["anthropic", "anthropic-api", "github-copilot", "opencode"],
         model: "claude-fable-5-1",
@@ -60,6 +66,11 @@ export const CATEGORY_MODEL_REQUIREMENTS: Record<string, ModelRequirement> = {
   },
   artistry: {
     fallbackChain: [
+      {
+        providers: ["anthropic", "anthropic-api", "github-copilot", "opencode"],
+        model: FABLE_55_LAUNCH.id,
+        variant: "max",
+      },
       {
         providers: ["anthropic", "anthropic-api", "github-copilot", "opencode"],
         model: "claude-fable-5-1",

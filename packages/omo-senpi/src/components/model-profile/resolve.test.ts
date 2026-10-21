@@ -164,6 +164,21 @@ describe("resolveModelProfile", () => {
 })
 
 describe("builtin chain routing", () => {
+  it("prefers Fable 5.5 at the existing effort without changing listed providers", () => {
+    // given
+    const availableModels = [
+      "opencode/claude-fable-5-5",
+      "anthropic-subscription/claude-fable-5-5",
+      FABLE,
+    ]
+    // when
+    const result = resolveModelProfile({ active: "daily-heavy", availableModels })
+    // then
+    expect(result).toMatchObject({
+      kind: "resolved", provider: "anthropic-subscription", modelId: "claude-fable-5-5", reasoning: "xhigh",
+    })
+  })
+
   it("keeps daily-heavy on the Claude subscription when an OpenCode Zen key serves the same model", () => {
     const result = resolveModelProfile({ active: "daily-heavy", availableModels: [FABLE_ZEN, FABLE] })
 
@@ -264,6 +279,7 @@ describe("builtin chain routing", () => {
         availableModels: [
           "openrouter/anthropic/claude-opus-5.5",
           "opengateway/anthropic/claude-fable-5-1",
+          "opengateway/anthropic/claude-fable-5-5",
           "openrouter/moonshotai/kimi-k3",
           "openrouter/openai/gpt-6-astra",
           "openrouter/openai/gpt-5.6-sol",

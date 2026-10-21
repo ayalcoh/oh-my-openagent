@@ -98,13 +98,12 @@ describe("builtin Claude rungs under the senpi harness", () => {
     const meteredHigh = expectResolvedCategory(resolveCategory("unspecified-high", {}, meteredOnlyRegistry))
     const planConsultant = expectResolvedAgent(resolveAgent("plan-consultant", BUILTIN_AGENTS, apiKeyRegistry))
 
-    // then: the provider-pinned category default still wins outright, opencode is still the last
-    // resort on a metered-only machine, and the requested-model record is untouched
+    // then: absent 5.5 falls back to 5.1; the provider order and requested-model record survive
     expect([architect.spec.provider, architect.spec.modelId, architect.spec.variant]).toEqual([
       "anthropic", "claude-fable-5-1", "max",
     ])
-    expect(architect.spec.requested_model?.display).toBe("anthropic/claude-fable-5-1")
-    expect(architect.modelSelection).toMatchObject({ selectedModel: "anthropic/claude-fable-5-1", matchedFallback: false })
+    expect(architect.spec.requested_model?.display).toBe("anthropic/claude-fable-5-5")
+    expect(architect.modelSelection).toMatchObject({ selectedModel: "anthropic/claude-fable-5-1", matchedFallback: true })
     expect([meteredArchitect.spec.provider, meteredArchitect.spec.modelId, meteredArchitect.spec.variant]).toEqual([
       "opencode", "claude-fable-5-1", "max",
     ])

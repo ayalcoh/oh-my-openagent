@@ -46,6 +46,18 @@ export const SCENARIOS = {
     registerProviders: ["anthropic"],
     expect: { model: "claude-fable-5-1", provider: "anthropic", notice: APPLIED_TYPE, thinking: "xhigh" },
   },
+  "daily-heavy-fable55": {
+    omoConfig: { model_profile: "daily-heavy" },
+    mockModels: ["mock-1", "claude-fable-5-1", "claude-fable-5-5"],
+    registerProviders: ["anthropic", "opencode"],
+    expect: { model: "claude-fable-5-5", provider: "anthropic", notice: APPLIED_TYPE, thinking: "xhigh" },
+  },
+  "daily-heavy-fable55-gateway-unavailable": {
+    omoConfig: { model_profile: "daily-heavy" },
+    mockModels: ["mock-1", "anthropic/claude-fable-5-5"],
+    registerProviders: ["opengateway"],
+    expect: { model: "mock-1", notice: UNAVAILABLE_TYPE },
+  },
   "geeky-normal-sol": {
     omoConfig: { model_profile: "geeky-normal" },
     mockModels: ["mock-1", "gpt-5.6-sol", "gpt-6.1-sol"],

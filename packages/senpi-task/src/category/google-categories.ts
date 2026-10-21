@@ -1,4 +1,5 @@
 import type { BuiltinCategoryDefinition } from "./types"
+import { FABLE_55_LAUNCH } from "@oh-my-opencode/model-core"
 
 // Ported from packages/omo-opencode/src/tools/delegate-task/google-categories.ts.
 const VISUAL_CATEGORY_PROMPT_APPEND = `<Category_Context>
@@ -120,7 +121,7 @@ export const GOOGLE_CATEGORIES = [
   },
   {
     name: "artistry",
-    config: { model: "anthropic/claude-fable-5-1", variant: "max" },
+    config: { model: `anthropic/${FABLE_55_LAUNCH.id}`, variant: "max" },
     description: "Complex problem-solving with unconventional, creative approaches - beyond standard patterns",
     promptAppend: ARTISTRY_CATEGORY_PROMPT_APPEND,
   },

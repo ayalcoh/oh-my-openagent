@@ -1,3 +1,4 @@
+import { FABLE_55_LAUNCH } from "./fable-55-launch"
 import type { ModelRequirement } from "./model-requirement-types"
 
 export const AGENT_MODEL_REQUIREMENTS: Record<string, ModelRequirement> = {
@@ -92,6 +93,11 @@ export const AGENT_MODEL_REQUIREMENTS: Record<string, ModelRequirement> = {
     fallbackChain: [
       {
         providers: ["anthropic", "github-copilot", "opencode"],
+        model: FABLE_55_LAUNCH.id,
+        variant: "xhigh",
+      },
+      {
+        providers: ["anthropic", "github-copilot", "opencode"],
         model: "claude-fable-5-1",
         variant: "xhigh",
       },
@@ -109,6 +115,11 @@ export const AGENT_MODEL_REQUIREMENTS: Record<string, ModelRequirement> = {
   },
   metis: {
     fallbackChain: [
+      {
+        providers: ["anthropic", "github-copilot", "opencode"],
+        model: FABLE_55_LAUNCH.id,
+        variant: "max",
+      },
       {
         providers: ["anthropic", "github-copilot", "opencode"],
         model: "claude-fable-5-1",

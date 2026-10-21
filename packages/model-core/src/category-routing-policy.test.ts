@@ -19,6 +19,11 @@ describe("category routing policy", () => {
       },
       {
         providers: ["anthropic", "anthropic-api", "github-copilot", "opencode"],
+        model: "claude-fable-5-5",
+        variant: "max",
+      },
+      {
+        providers: ["anthropic", "anthropic-api", "github-copilot", "opencode"],
         model: "claude-fable-5-1",
         variant: "max",
       },
@@ -201,6 +206,11 @@ describe("category routing policy", () => {
       }
     ])
     expect(artistryChain).toEqual([
+      {
+        providers: ["anthropic", "anthropic-api", "github-copilot", "opencode"],
+        model: "claude-fable-5-5",
+        variant: "max",
+      },
       {
         providers: ["anthropic", "anthropic-api", "github-copilot", "opencode"],
         model: "claude-fable-5-1",

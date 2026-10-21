@@ -45,10 +45,12 @@ describe("GPT-6 family routing", () => {
   test.each([
     ["artistry", CATEGORY_MODEL_REQUIREMENTS],
     ["prometheus", AGENT_MODEL_REQUIREMENTS],
-  ] as const)("%s follows its Fable 5.1 lead with claude-opus-5-5 max", (name, table) => {
+  ] as const)("%s follows Fable 5.5 and 5.1 with claude-opus-5-5 max", (name, table) => {
     const chain = table[name].fallbackChain
-    expect(chain[0]?.model).toBe("claude-fable-5-1")
-    expect(chain[1]).toMatchObject({ model: "claude-opus-5-5", variant: "max" })
+    expect(chain[0]?.model).toBe("claude-fable-5-5")
+    expect(chain[1]?.model).toBe("claude-fable-5-1")
+    expect(chain[2]).toMatchObject({ model: "claude-opus-5-5", variant: "max" })
     expect(chain[1]?.providers).toEqual(chain[0]?.providers)
+    expect(chain[2]?.providers).toEqual(chain[0]?.providers)
   })
 })
